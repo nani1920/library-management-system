@@ -154,12 +154,8 @@ This API uses **JWT (JSON Web Token)** based authentication.
 ---
 
 ## 8. Deployment URL
-
-> _Add your deployment URL here once deployed._
-
-```
 https://library-management-system-ka97.onrender.com
-```
+
 
 ---
 
