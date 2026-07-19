@@ -58,9 +58,6 @@ const getMyBorrowedBookService = async (user) => {
     })
     .sort("-createdAt")
     .select("-returnDate -memberId");
-  if (!borrowedBooks || borrowedBooks.length === 0) {
-    throw createError(404, "borrows not found");
-  }
   return borrowedBooks;
 };
 
@@ -76,9 +73,7 @@ const getMyHistoryBookService = async (user) => {
     })
     .sort("-createdAt")
     .select("-returnDate -memberId");
-  if (!borrowedBooks || borrowedBooks.length === 0) {
-    throw createError(404, "borrows not found");
-  }
+
   return borrowedBooks;
 };
 

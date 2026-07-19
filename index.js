@@ -14,9 +14,11 @@ app.use(express.json());
 const authRoute = require("./src/routes/auth.route");
 const bookRoute = require("./src/routes/books.route");
 const memberRoute = require("./src/routes/members.route");
+const wishlistRoute = require("./src/routes/wishlist.route");
 app.use("/api/auth/", authRoute);
 app.use("/api/books/", bookRoute);
 app.use("/api/members", memberRoute);
+app.use("/api/wishlist", wishlistRoute);
 
 app.get("/", async (req, res) => {
   res.json({ success: true, message: "Server is Healthy" });

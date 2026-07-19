@@ -76,6 +76,7 @@ This project uses **MongoDB** (via MongoDB Atlas or local instance).
   - `User` — stores user info with role (`member` or `librarian`)
   - `Book` — stores book details
   - `Borrow` — tracks borrow and return records
+  - `Wishlist` — tracks each user's wishlist (one entry per user-book pair)
 
 To use MongoDB Atlas:
 
@@ -112,6 +113,14 @@ http://localhost:3000/api
 | DELETE | `/api/books/:id`        | Delete a book     | Librarian              |
 | POST   | `/api/books/:id/borrow` | Borrow a book     | Member                 |
 | POST   | `/api/books/:id/return` | Return a book     | Member                 |
+
+### Wishlist Routes — `/api/wishlist`
+
+| Method | Endpoint                    | Description                  | Role   |
+| ------ | --------------------------- | ---------------------------- | ------ |
+| GET    | `/api/wishlist`             | Get my wishlist              | Member |
+| POST   | `/api/wishlist/:bookId`     | Add a book to wishlist       | Member |
+| DELETE | `/api/wishlist/:bookId`     | Remove a book from wishlist  | Member |
 
 ### Member Routes — `/api/members`
 

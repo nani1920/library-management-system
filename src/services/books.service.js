@@ -38,7 +38,16 @@ const getBookFilters = (options, page, limit) => {
 };
 
 const createBookService = async (data) => {
-  const { title, author, isbn, category, quantity, availableQuantity } = data;
+  const {
+    title,
+    author,
+    isbn,
+    category,
+    quantity,
+    availableQuantity,
+    imgUrl,
+    description,
+  } = data;
 
   const bookExists = await bookModel.findOne({ isbn });
   if (bookExists) {
@@ -51,6 +60,8 @@ const createBookService = async (data) => {
     category,
     quantity,
     availableQuantity: quantity,
+    imgUrl,
+    description,
   };
 
   const book = await bookModel.create(updatedBody);
@@ -66,8 +77,19 @@ const getBooksService = async (data) => {
   const books = result.books;
   const total = result?.total[0]?.count;
   const totalPages = Math.ceil(total / limit);
+  const hasNextPage = page < totalPages;
 
-  return { page, limit, totalItems: total, totalPages, books };
+  const hasPreviousPage = page > 1;
+
+  return {
+    page,
+    limit,
+    totalItems: total,
+    totalPages,
+    hasNextPage,
+    hasPreviousPage,
+    books,
+  };
 };
 
 const getBookByIdService = async (bookId) => {
@@ -90,6 +112,8 @@ const updateBookByIdService = async (bookId, data) => {
     ...(data.availableQuantity && {
       availableQuantity: data.availableQuantity,
     }),
+    ...(data.imgUrl && { imgUrl: data.imgUrl }),
+    ...(data.description && { description: data.description }),
   };
   const updatedBook = await bookModel.findByIdAndUpdate(bookId, updatedData, {
     runValidators: true,

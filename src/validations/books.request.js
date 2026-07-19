@@ -20,13 +20,19 @@ const createBookRequest = z
     isbn: z.string().trim().min(10, "ISBN Number must be 10 characters"),
     category: z.string().trim().min(2, "Category is required"),
     quantity: z.coerce.number().min(0, "Quantity can't be negative"),
+    imgUrl: z.string().trim().url("Please provide a valid image URL"),
+    description: z
+      .string()
+      .trim()
+      .min(10, "Description should have at least 10 characters")
+      .max(2000, "Description cannot exceed 2000 characters"),
   })
   .strict();
 
 const updateBookRequest = createBookRequest
   .partial()
   .refine((data) => Object.keys(data).length > 0, {
-    message: "atleast one field required to update book",
+    message: "atLeast one field required to update book",
   });
 
 const validateBookId = z.object({
