@@ -6,6 +6,7 @@ const {
   deleteMemberByIdService,
   getMyBorrowedBookService,
   getMyHistoryBookService,
+  getMyProfileService,
 } = require("../services/members.service");
 const getMembers = async (req, res) => {
   try {
@@ -57,9 +58,19 @@ const getMyHistoryBooks = async (req, res) => {
   }
 };
 
+const getMyProfile = async (req, res) => {
+  try {
+    const user = await getMyProfileService(req.user.id);
+    sendResponse(res, 200, "Profile fetched successfully", user);
+  } catch (error) {
+    sendErrorResponse(res, error.statusCode || 500, error.message || "Internal Server Issue");
+  }
+};
+
 module.exports = {
   getMembers,
   deleteMemberById,
   getMyBorrowedBooks,
   getMyHistoryBooks,
+  getMyProfile,
 };

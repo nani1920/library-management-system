@@ -13,6 +13,7 @@ const {
   deleteMemberById,
   getMyBorrowedBooks,
   getMyHistoryBooks,
+  getMyProfile,
 } = require("../controllers/members.controller");
 
 router.use(isAuthenticated);
@@ -24,6 +25,7 @@ router.delete(
   authorizeRole("librarian"),
   deleteMemberById,
 );
+router.get("/me", getMyProfile);
 router.get("/me/books", authorizeRole("member"), getMyBorrowedBooks);
 router.get("/me/history", authorizeRole("member"), getMyHistoryBooks);
 

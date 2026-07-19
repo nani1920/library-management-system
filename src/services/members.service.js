@@ -24,6 +24,12 @@ const getMemberFilters = (options, page, limit) => {
   pipeline.push({ $facet: facet });
   return pipeline;
 };
+const getMyProfileService = async (userId) => {
+  const user = await userModel.findById(userId).select("-password -__v");
+  if (!user) throw createError(404, "User not found");
+  return user;
+};
+
 const getMembersService = async (data) => {
   const page = Number(data.page) || 1;
   const limit = Number(data.limit) || 10;
@@ -82,4 +88,5 @@ module.exports = {
   deleteMemberByIdService,
   getMyBorrowedBookService,
   getMyHistoryBookService,
+  getMyProfileService,
 };

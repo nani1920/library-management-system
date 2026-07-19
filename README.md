@@ -128,6 +128,7 @@ http://localhost:3000/api
 | ------ | ------------------------- | ------------------------------- | --------- |
 | GET    | `/api/members`            | Get all members                 | Librarian |
 | DELETE | `/api/members/:id`        | Delete a member                 | Librarian |
+| GET    | `/api/members/me`         | Get my profile                  | Any authenticated user |
 | GET    | `/api/members/me/books`   | Get my currently borrowed books | Member    |
 | GET    | `/api/members/me/history` | Get my borrow history           | Member    |
 
